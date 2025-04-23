@@ -1,3 +1,4 @@
+import static javax.swing.JOptionPane.*;
 import java.text.DecimalFormat;
 
 public class Controle {
@@ -6,8 +7,12 @@ public class Controle {
     private int index = 0;
 
     public void inserir(Empregado empregado) {
-        empregados[index] = empregado;
-        index++;
+        if(index == empregados.length) {
+            showMessageDialog(null, "Lista de empregados cheia!");
+        } else {
+            empregados[index] = empregado;
+            index++;
+        }
     }
 
     public Empregado pesquisar(long matricula) {
@@ -23,8 +28,8 @@ public class Controle {
         DecimalFormat df = new DecimalFormat("#,##0.00");
         String aux = "";
         for (int i = 0; i < index; i++) {
-            aux += empregados[i].getDados();
-            aux += "Salário: R$" + df.format(empregados[i].calcularSalario());
+            aux += empregados[i].getDados() + "\n";
+            aux += "Salário: R$" + df.format(empregados[i].calcularSalario()) + "\n\n" ;
         }
         return aux;
     }
